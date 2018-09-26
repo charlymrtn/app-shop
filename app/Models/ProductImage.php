@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class ProductImage extends Model
 {
     //
     use SoftDeletes;
@@ -13,8 +13,8 @@ class Category extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function products()
+    public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
