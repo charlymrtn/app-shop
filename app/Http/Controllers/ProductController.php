@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
         return view('admin.products.index',compact('products')); //listado de producto
     }
 
@@ -37,6 +37,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //registrar nuevos productos
+        $product = new Product();
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->long_description = $request->input('long_description');
+        $product->price = $request->input('price');
+
+        $product->save();
+
+        return redirect()->route('products.index');
     }
 
     /**

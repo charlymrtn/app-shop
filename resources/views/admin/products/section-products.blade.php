@@ -2,6 +2,7 @@
     <h2 class="title">Lista de Productos</h2>
     <div class="team">
         <div class="row">
+            <a href="{{route('products.create')}}" class="btn btn-primary btn-round">Nuevo Producto</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -19,7 +20,7 @@
                         <td class="text-center">{{$product->id}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->description}}</td>
-                        <td>{{$product->category->name}}</td>
+                        <td>{{$product->category ? $product->category->name : 'General'}}</td>
                         <td class="text-right">${{$product->price}}</td>
                         <td class="td-actions text-right">
                             <button type="button" rel="tooltip" title="Ver producto" class="btn btn-info">
@@ -36,6 +37,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{$products->links()}}
         </div>
     </div>
 </div>
