@@ -37,6 +37,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.min' => 'El nombre debe tener al menos 3 carácteres.',
+            'description.required' => 'La descripción es obligatorio.',
+            'description.max' => 'La descripción no puede exceder los 50 carácteres.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio tiene que ser númerico.',
+            'price.min' => 'El precio no puede ser menor a cero.',
+        ];
+
+        $rules = [
+            'name' => 'required|min:3',
+            'description' => 'required|max:100',
+            'price' => 'required|numeric|min:0'
+        ];
+
+        $this->validate($request,$rules,$messages);
         //registrar nuevos productos
         $product = new Product();
 
@@ -84,6 +101,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $messages = [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.min' => 'El nombre debe tener al menos 3 carácteres.',
+            'description.required' => 'La descripción es obligatorio.',
+            'description.max' => 'La descripción no puede exceder los 50 carácteres.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio tiene que ser númerico.',
+            'price.min' => 'El precio no puede ser menor a cero.',
+        ];
+
+        $rules = [
+            'name' => 'required|min:3',
+            'description' => 'required|max:100',
+            'price' => 'required|numeric|min:0'
+        ];
+        $this->validate($request,$rules,$messages);
         //
         $product->name = $request->input('name');
         $product->description = $request->input('description');
