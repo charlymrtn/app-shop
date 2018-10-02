@@ -15,7 +15,7 @@ class ImageController extends Controller
     public function index($id)
     {
         $product = Product::find($id);
-        $images = $product->images;
+        $images = $product->images()->orderBy('featured','desc')->get();
         return view('admin.images.index',compact('product','images'));
     }
 
@@ -56,6 +56,22 @@ class ImageController extends Controller
             $deleted = File::delete($fullPath);
         }
         if($deleted) $image->delete();
+
+        return back();
+    }
+
+    public function featured($product,$image)
+    {
+
+        $image = Image::find($image);
+        if(!$image->featured){
+            $image->featured = true;
+            $images = Image::where('product_id',$product)->update([
+                'featured' => false
+            ]);
+        }
+
+        $image->save();
 
         return back();
     }

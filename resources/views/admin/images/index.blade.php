@@ -40,7 +40,16 @@
                                 <form action="{{route('images.destroy',$image->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-round">Eliminar</a>
+                                    <button type="submit" class="btn btn-warning btn-round">Eliminar</button>
+                                    @if($image->featured)
+                                    <button type="button" class="btn btn-danger btn-fab btn-fab-mini btn-round" rel="tooltip" title="Imágen principal.">
+                                        <i class="material-icons">favorite</i>
+                                    </button>
+                                    @else
+                                    <a href="{{route('images.featured',[$product->id,$image->id])}}" class="btn btn-default btn-fab btn-fab-mini btn-round">
+                                        <i class="material-icons">favorite</i>
+                                    </a>
+                                    @endif
                                 </form>
                             </div>
                         </div>
