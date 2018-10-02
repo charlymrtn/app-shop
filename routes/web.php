@@ -19,4 +19,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::resource('products','ProductController');
+
+    Route::get('products/{id}/images','ImageController@index')->name('images.index');
+    Route::post('products/{id}/images','ImageController@store')->name('images.store');
+    Route::delete('products/{id}/images','ImageController@destroy')->name('images.destroy');
 });
