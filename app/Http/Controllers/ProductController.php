@@ -25,7 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create'); //formulario de registro
+        $metodo = 'crear';
+        return view('admin.products.product',compact('metodo')); //formulario
     }
 
     /**
@@ -58,6 +59,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        $metodo = 'mostrar';
+        return view('admin.products.product',compact('metodo','product')); //formulario
     }
 
     /**
@@ -68,7 +71,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $metodo = 'editar';
+        return view('admin.products.product',compact('metodo','product')); //formulario
     }
 
     /**
@@ -81,6 +85,15 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->long_description = $request->input('long_description');
+        $product->price = $request->input('price');
+
+        $product->save();
+
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -91,6 +104,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        //r
+        $product->delete();
+        return redirect()->back();
     }
 }

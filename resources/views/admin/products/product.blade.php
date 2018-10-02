@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title','Guardar Producto')
+@if ($metodo == 'crear')
+    @section('title','Guardar Producto')
+@elseif ($metodo == 'mostrar')
+    @section('title','Ver Producto')
+@else
+    @section('title','Editar Producto')
+@endif
 
 @section('body-class','profile-page sidebar-collapse')
 
@@ -10,7 +16,11 @@
     <div class="main main-raised">
         <div class="container">
 
-            @include('forms.create')
+            @if ($metodo == 'crear')
+                @include('forms.create')
+            @else
+                @include('forms.edit')
+            @endif
 
         </div>
     </div>

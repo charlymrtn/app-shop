@@ -23,15 +23,20 @@
                         <td>{{$product->category ? $product->category->name : 'General'}}</td>
                         <td class="text-right">${{$product->price}}</td>
                         <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" title="Ver producto" class="btn btn-info">
+                            <a href="{{route('products.show',$product->id)}}" rel="tooltip" title="Ver producto" class="btn btn-info">
                                 <i class="material-icons">info</i>
-                            </button>
-                            <button type="button" rel="tooltip" title="Editar producto" class="btn btn-success">
+                            </a>
+                            <a href="{{route('products.edit',$product->id)}}" rel="tooltip" title="Editar producto" class="btn btn-success">
                                 <i class="material-icons">edit</i>
-                            </button>
-                            <button type="button" rel="tooltip" title="Eliminar producto" class="btn btn-danger">
-                                <i class="material-icons">close</i>
-                            </button>
+                            </a>
+                            <form action="{{route('products.destroy',$product->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" rel="tooltip" title="Eliminar producto" class="btn btn-danger">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </form>
+
                         </td>
                     </tr>
                     @endforeach

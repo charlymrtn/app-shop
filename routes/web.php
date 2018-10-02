@@ -19,7 +19,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
     Route::resource('products','ProductController');
-    // Route::get('products','ProductController@index');
-    // Route::get('products/create','ProductController@create');
-    // Route::post('products','ProductController@store');
 });
