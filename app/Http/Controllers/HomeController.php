@@ -25,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $details = Auth::user()->cart->details;
+        $cart = Auth::user()->cart;
+        $details = $cart->details;
         $totalPiezas = 0;
         $total = 0;
         foreach ($details as $detail) {
@@ -33,7 +34,7 @@ class HomeController extends Controller
             $totalPiezas = $totalPiezas + $detail->quantity;
             $total = $total + ($detail->quantity*$detail->product->price);
         }
-        return view('home',compact('details','totalPiezas','total'));
+        return view('home',compact('cart','details','totalPiezas','total'));
     }
 
     public function welcome()

@@ -7,6 +7,7 @@ use App\Models\CartDetail as Detail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CartDetailController extends Controller
 {
@@ -111,6 +112,37 @@ class CartDetailController extends Controller
     public function update(Request $request, Cart $cart)
     {
         //
+        $messages = [
+            'cart_id.required' => 'El pedido es requerido.',
+            'order_date.required' => 'La fecha es requerida.',
+            'order_date.date' => 'La fecha no es válida.',
+            'order_date.after' => 'Día no disponible, mínimo dos días.',
+        ];
+
+        $rules = [
+            'cart_id' => 'required',
+            'order_date' => 'required|date|after:tomorrow',
+        ];
+
+        $this->validate($request,$rules,$messages);
+
+        $cart = Auth::user()->cart;
+
+        if($request->cart_id != $cart->id){
+            $notificacion = 'error al procesar el pedido';
+            $status = 'error';
+            return back()->with(compact('notificacion','status'));
+        }
+
+        $order_date = new Carbon($request->order_date);
+
+        $cart->status = 2;
+        $cart->order_date = $order_date;
+        $cart->save();
+
+        $notificacion = 'Pedido procesado, en espera de confirmación';
+        $status = 'success';
+        return back()->with(compact('notificacion','status'));
     }
 
     /**
