@@ -12,6 +12,7 @@ class ProductImage extends Model
 
 
     protected $dates = ['deleted_at'];
+    protected $hidden = ['deleted_at'];
 
     public function product()
     {

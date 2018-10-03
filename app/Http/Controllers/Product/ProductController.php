@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Product;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -76,8 +78,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        $metodo = 'mostrar';
-        return view('admin.products.product',compact('metodo','product')); //formulario
+        return $product;
     }
 
     /**

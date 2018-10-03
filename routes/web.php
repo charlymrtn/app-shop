@@ -11,17 +11,21 @@
 |
 */
 
-Route::get('/', 'TestController@welcome');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
-    Route::resource('products','ProductController');
+Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->group(function () {
+    Route::resource('products','ProductController')->except('show');
 
     Route::get('products/{id}/images','ImageController@index')->name('images.index');
     Route::post('products/{id}/images','ImageController@store')->name('images.store');
     Route::delete('products/{id}/images','ImageController@destroy')->name('images.destroy');
     Route::get('products/{product}/images/{image}/featured','ImageController@featured')->name('images.featured');
 });
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('products/{product}','Product\ProductController@show')->name('products.show');
+    Route::get('/', 'HomeController@welcome');
+});
+

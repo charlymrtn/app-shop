@@ -9,7 +9,8 @@
                 <div class="col-md-6 ml-auto mr-auto">
                     <img src="{{$product->featured_image}}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                 </div>
-                <h4 class="card-title">{{$product->name}}
+                <h4 class="card-title">
+                    <a href="{{route('products.show',$product->id)}}">{{$product->name}}</a>
                     <br>
                     <small class="card-description text-muted">
                         {{ $product->category ? $product->category->name : 'General'}}
@@ -17,11 +18,6 @@
                 </h4>
                 <div class="card-body">
                     <p class="card-description">{{$product->description}}</p>
-                </div>
-                <div class="card-footer justify-content-center">
-                    {{-- <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
-                    <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-facebook-square"></i></a> --}}
                 </div>
                 </div>
             </div>
