@@ -12,8 +12,6 @@
             @include('cart.cart-detail')
         </div>
     </div>
-    @foreach ($details as $detail)
-        @include('modal.delete-detail')
-    @endforeach
+    @yield('modal')
     @include('extras.footer')
 @endsection

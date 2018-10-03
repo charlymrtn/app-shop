@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductImage as Image;
 use File;
 use Image as Img;
+use Session;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -19,6 +20,7 @@ class ImageController extends Controller
     {
         $product = Product::find($id);
         $images = $product->images()->orderBy('featured','desc')->get();
+        Session::put('product_id',$product->id);
         return view('admin.images.index',compact('product','images'));
     }
 
@@ -56,7 +58,8 @@ class ImageController extends Controller
 
     public function destroy($id)
     {
-        $image = Image::find($id);
+        $product_id = Session::get('product_id');
+        $image = Image::find($id)->where('product_id',$product_id)->first();
         $deleted = true;
         if(substr($image->image,0,4) !== 'http'){
             $fullPath = public_path().'/images/products/'.$image->image;
@@ -64,7 +67,9 @@ class ImageController extends Controller
         }
         if($deleted) $image->delete();
 
-        return back();
+        $notificacion = 'imagen eliminada correctamente';
+        $status = 'success';
+        return back()->with(compact('notificacion','status'));
     }
 
     public function featured($product,$image)

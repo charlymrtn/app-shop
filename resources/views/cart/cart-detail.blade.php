@@ -1,10 +1,12 @@
+@section('modal')
+    @foreach ($details as $detail)
+        @include('modal.delete-detail')
+    @endforeach
+@endsection
+
 <div class="section">
     <h2 class="title text-center">Hola {{Auth::user()->name}}</h2>
-    @if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
+    @include('extras.notifications')
     <ul class="nav nav-pills nav-pills-icons" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
@@ -19,6 +21,8 @@
             </a>
         </li>
     </ul>
+    <hr>
+    <h4>Tu carrito de compras presenta {{count($details)}} productos</h4>
 
     <table class="table">
         <thead>

@@ -79,7 +79,7 @@ class ProductController extends Controller
     {
         //
         $metodo = 'profile';
-        
+
         $images = $product->images;
         $imgL = collect();
         $imgR = collect();
@@ -150,6 +150,8 @@ class ProductController extends Controller
     {
         //r
         $product->delete();
-        return redirect()->back();
+        $notificacion = 'El producto fue eliminado correctamente.';
+        $status = 'success';
+        return redirect()->back()->with(compact('notificacion','status'));
     }
 }

@@ -11,18 +11,11 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
+                @include('extras.notifications')
                 <h2 class="title">Imágenes del producto {{$product->name}}</h2>
                 <div class="card">
                     <div class="card-body">
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
+                        @include('extras.errors')
                         <form action="{{route('images.store',$product->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="photo">
@@ -60,6 +53,6 @@
     @foreach ($images as $image)
         @include('modal.delete-image')
     @endforeach
-    
+
     @include('extras.footer')
 @endsection

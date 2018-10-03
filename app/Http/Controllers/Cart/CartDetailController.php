@@ -54,13 +54,29 @@ class CartDetailController extends Controller
 
         $this->validate($request,$rules,$messages);
 
-        $detail = new Detail();
-        $detail->cart_id = Auth::user()->cart->id;
-        $detail->product_id = $request->product_id;
-        $detail->quantity = $request->quantity;
-        $detail->save();
+        $cart_id = Auth::user()->cart->id;
 
-        return back();
+        $detail = Detail::where('cart_id',$cart_id)->where('product_id',$request->product_id)->first();
+
+        if($detail){
+            $detail->quantity = $detail->quantity + $request->quantity;
+            if($detail->quantity > 10){
+                $notificacion = 'No se puede añadir mas de 10 piezas de un mismo producto al carrito de compras.';
+                $status = 'error';
+                return back()->with(compact('notificacion','status'));
+            }
+            $detail->save();
+        }else{
+            $detail = new Detail();
+            $detail->cart_id = Auth::user()->cart->id;
+            $detail->product_id = $request->product_id;
+            $detail->quantity = $request->quantity;
+            $detail->save();
+        }
+
+        $notificacion = 'El producto fue añadido al carrito.';
+        $status = 'success';
+        return back()->with(compact('notificacion','status'));
     }
 
     /**
@@ -106,7 +122,16 @@ class CartDetailController extends Controller
     public function destroy(Detail $cart)
     {
         //
-        $cart->delete();
-        return redirect()->back();
+        if($cart->cart_id == Auth::user()->cart->id){
+            $cart->delete();
+            $notificacion = 'El producto fue removido del carrito';
+            $status = 'success';
+        }else{
+            $notificacion = 'Hubo un problema al borrar el producto.';
+            $status = 'error';
+        }
+
+
+        return redirect()->back()->with(compact('notificacion','status'));
     }
 }
