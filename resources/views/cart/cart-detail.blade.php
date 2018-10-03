@@ -27,21 +27,23 @@
                 <th>Nombre</th>
                 <th>Categoría</th>
                 <th>Cantidad</th>
-                <th class="text-right">Precio</th>
-                <th class="text-right">Opciones</th>
+                <th>Precio unit.</th>
+                <th>Subtotal</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Auth::user()->cart->details as $detail)
+            @foreach ($details as $detail)
                 <tr>
-                    <td class="text-center">{{$detail->id}}</td>
-                    <td>{{$detail->product->name}}</td>
+                    <td><img src="{{$detail->product->featured_image}}" alt="" width="150"></td>
+                    <td><a href="{{route('products.show',$detail->product->id)}}">{{$detail->product->name}}</a></td>
                     <td>{{$detail->product->category ? $detail->product->category->name : 'General'}}</td>
                     <td>{{$detail->quantity}}</td>
-                    <td class="text-right">${{$detail->product->price}}</td>
-                    <td class="td-actions text-right">
-                        <a href="{{route('images.index',$detail->product->id)}}" rel="tooltip" title="Imagenes" class="btn btn-default btn-simple btn-xs">
-                            <i class="fa fa-photo"></i>
+                    <td>${{$detail->product->price}}</td>
+                    <td>${{($detail->product->price)*($detail->quantity)}}</td>
+                    <td class="td-actions">
+                        <a href="{{route('products.show',$detail->product->id)}}" target="_blank" rel="tooltip" title="Ver producto" class="btn btn-info btn-simple btn-xs">
+                            <i class="fa fa-info"></i>
                         </a>
                         <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" data-toggle="modal" data-target="#deleteDetail{{$detail->id}}">
                             <i class="fa fa-times"></i>
@@ -49,6 +51,24 @@
                     </td>
                 </tr>
             @endforeach
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Total piezas</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$totalPiezas}}</td>
+                <td>${{$total}}</td>
+            </tr>
         </tbody>
     </table>
 </div>

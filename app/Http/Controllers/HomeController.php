@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $details = Auth::user()->cart->details;
+        $totalPiezas = 0;
+        $total = 0;
+        foreach ($details as $detail) {
+            # code...
+            $totalPiezas = $totalPiezas + $detail->quantity;
+            $total = $total + ($detail->quantity*$detail->product->price);
+        }
+        return view('home',compact('details','totalPiezas','total'));
     }
 
     public function welcome()

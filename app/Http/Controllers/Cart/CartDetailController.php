@@ -106,6 +106,7 @@ class CartDetailController extends Controller
     public function destroy(Detail $cart)
     {
         //
-        return $cart;
+        $cart->delete();
+        return redirect()->back();
     }
 }

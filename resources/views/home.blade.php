@@ -12,7 +12,7 @@
             @include('cart.cart-detail')
         </div>
     </div>
-    @foreach (Auth::user()->cart->details as $detail)
+    @foreach ($details as $detail)
         @include('modal.delete-detail')
     @endforeach
     @include('extras.footer')
