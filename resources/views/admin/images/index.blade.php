@@ -56,8 +56,10 @@
             </div>
         </div>
     </div>
+
     @foreach ($images as $image)
         @include('modal.delete-image')
     @endforeach
+    
     @include('extras.footer')
 @endsection
