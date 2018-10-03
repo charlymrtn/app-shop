@@ -131,7 +131,6 @@ class CartDetailController extends Controller
             $status = 'error';
         }
 
-
         return redirect()->back()->with(compact('notificacion','status'));
     }
 }
