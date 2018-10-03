@@ -29,6 +29,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('home')}}">Panel de Control</a>
                             @if (Auth::user()->admin)
                                 <a class="dropdown-item" href="{{route('products.index')}}">Gestionar Productos</a>
                             @endif

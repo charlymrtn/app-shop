@@ -27,5 +27,9 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
 Route::middleware(['auth'])->group(function() {
     Route::get('products/{product}','Product\ProductController@show')->name('products.show');
     Route::get('/', 'HomeController@welcome');
+    //Route::post('cart','Cart\CartDetailController@store')->name('carts.store');
+
+    Route::resource('cart', 'Cart\CartDetailController');
+
 });
 

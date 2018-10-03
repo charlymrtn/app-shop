@@ -28,6 +28,16 @@
     </button>
 </div>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="tab-content tab-space">
     <div class="tab-pane active text-center gallery" id="studio">
         <div class="row">

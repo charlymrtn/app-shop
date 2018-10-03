@@ -11,7 +11,7 @@ class CartDetail extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $hidden = ['deleted_at'];
+    protected $hidden = ['updated_at','deleted_at'];
 
     public function product()
     {

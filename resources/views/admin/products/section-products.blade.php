@@ -32,19 +32,19 @@
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="{{route('images.index',$product->id)}}" rel="tooltip" title="Imagenes" class="btn btn-default btn-simple btn-xs">
-                                    <i class="fa fa-photo"></i>
-                                </a>
+                                <i class="fa fa-photo"></i>
+                            </a>
                             <button type="button" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs" data-toggle="modal" data-target="#deleteProduct{{$product->id}}">
                                 <i class="fa fa-times"></i>
                             </button>
                         </td>
                     </tr>
-                    
+
                     @endforeach
                 </tbody>
             </table>
             {{$products->links()}}
-            
+
         </div>
     </div>
 </div>

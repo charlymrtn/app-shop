@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Models\Cart;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -28,8 +30,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function cart()
+    public function carts()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->hasMany(Cart::class);
+    }
+
+    public function getCartAttribute()
+    {
+        $cart = $this->carts()->where('status',1)->first();
+
+        if($cart) return $cart;
+
+        $cart = new Cart();
+        $cart->status = 1;
+        $cart->user_id = $this->id;
+        $cart->save();
+
+        return $cart;
     }
 }

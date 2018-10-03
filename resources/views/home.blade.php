@@ -9,29 +9,11 @@
     </div>
     <div class="main main-raised">
         <div class="container">
-            <div class="section">
-                <h2 class="title text-center">Hola {{Auth::user()->name}}</h2>
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
-                <ul class="nav nav-pills nav-pills-icons" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#dashboard-1" role="tab" data-toggle="tab">
-                            <i class="material-icons">shopping_cart</i>
-                            Carrito de compras
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
-                            <i class="material-icons">list</i>
-                            Pedidos realizados
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            @include('cart.cart-detail')
         </div>
     </div>
+    @foreach (Auth::user()->cart->details as $detail)
+        @include('modal.delete-detail')
+    @endforeach
     @include('extras.footer')
 @endsection
