@@ -26,5 +26,6 @@
 
         </div>
     </div>
+    @yield('modal')
     @include('extras.footer')
 @endsection

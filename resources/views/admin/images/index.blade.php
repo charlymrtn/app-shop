@@ -37,20 +37,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <img src="{{$image->url}}" alt="" width="250">
-                                <form action="{{route('images.destroy',$image->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-warning btn-round">Eliminar</button>
-                                    @if($image->featured)
-                                    <button type="button" class="btn btn-danger btn-fab btn-fab-mini btn-round" rel="tooltip" title="Imágen principal.">
-                                        <i class="material-icons">favorite</i>
-                                    </button>
-                                    @else
-                                    <a href="{{route('images.featured',[$product->id,$image->id])}}" class="btn btn-default btn-fab btn-fab-mini btn-round">
-                                        <i class="material-icons">favorite</i>
-                                    </a>
-                                    @endif
-                                </form>
+                                <button type="button" class="btn btn-warning btn-round" data-toggle="modal" data-target="#deleteImage{{$image->id}}">Eliminar</button>
+                                @if($image->featured)
+                                <button type="button" class="btn btn-danger btn-fab btn-fab-mini btn-round" rel="tooltip" title="Imágen principal.">
+                                    <i class="material-icons">favorite</i>
+                                </button>
+                                @else
+                                <a href="{{route('images.featured',[$product->id,$image->id])}}" class="btn btn-default btn-fab btn-fab-mini btn-round">
+                                    <i class="material-icons">favorite</i>
+                                </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -60,5 +56,8 @@
             </div>
         </div>
     </div>
+    @foreach ($images as $image)
+        @include('modal.delete-image')
+    @endforeach
     @include('extras.footer')
 @endsection

@@ -15,5 +15,10 @@
 
         </div>
     </div>
+
+    @foreach ($products as $product)
+        @include('modal.delete-product')
+    @endforeach
+
     @include('extras.footer')
 @endsection
