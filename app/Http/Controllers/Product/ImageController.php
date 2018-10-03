@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductImage as Image;
 use File;
+use Image as Img;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -28,15 +29,19 @@ class ImageController extends Controller
         ];
 
         $rules = [
-            'photo' => 'required'
+            'photo' => 'required|image'
         ];
 
         $this->validate($request,$rules,$messages);
 
         $file = $request->file('photo');
-        $path = public_path() . '/images/products'; //Ruta donde se guardará la imágen (ruta absoluta public_path)
+        $path = public_path() . '/images/products/'; //Ruta donde se guardará la imágen (ruta absoluta public_path)
         $fileName = uniqid() . $file->getClientOriginalName(); //Definir nombre para el archivo ID único + nombre original
-        $moved = $file->move($path, $fileName);
+        //$moved = $file->move($path, $fileName);
+
+        $moved = Img::make($file)
+                ->resize(250,250)
+                ->save($path . $fileName);
 
         if($moved){
             $image = new Image();

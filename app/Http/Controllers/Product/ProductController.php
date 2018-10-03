@@ -79,7 +79,16 @@ class ProductController extends Controller
     {
         //
         $metodo = 'profile';
-        return view('admin.products.product',compact('metodo','product')); //formulario
+        
+        $images = $product->images;
+        $imgL = collect();
+        $imgR = collect();
+        foreach ($images as $key => $image) {
+            # code...
+            $key%2==0 ? $imgL->push($image) : $imgR->push($image);
+        }
+
+        return view('admin.products.product',compact('metodo','product','imgL','imgR')); //formulario
     }
 
     /**

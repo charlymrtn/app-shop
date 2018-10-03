@@ -2,7 +2,7 @@
 
 @if ($metodo == 'crear')
     @section('title','Guardar Producto')
-@elseif ($metodo == 'mostrar')
+@elseif ($metodo == 'profile')
     @section('title','Ver Producto')
 @else
     @section('title','Editar Producto')
