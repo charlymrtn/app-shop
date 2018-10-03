@@ -78,7 +78,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        return $product;
+        $metodo = 'profile';
+        return view('admin.products.product',compact('metodo','product')); //formulario
     }
 
     /**

@@ -18,6 +18,8 @@
 
             @if ($metodo == 'crear')
                 @include('forms.create')
+            @elseif ($metodo == 'profile')
+                @include('profile.product')
             @else
                 @include('forms.edit')
             @endif
