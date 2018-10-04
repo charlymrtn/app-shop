@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cart;
+namespace App\Http\Controllers\Product;
 
 use App\Models\Cart;
 use App\Models\CartDetail as Detail;
@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+
+use Mail;
+use App\Mail\NewOrder;
+use App\User;
 
 class CartDetailController extends Controller
 {
@@ -126,23 +130,35 @@ class CartDetailController extends Controller
 
         $this->validate($request,$rules,$messages);
 
-        $cart = Auth::user()->cart;
+        $client = Auth::user();
+        $cart = $client->cart;
 
-        if($request->cart_id != $cart->id){
-            $notificacion = 'error al procesar el pedido';
+        if($cart->details()->count()>0){
+            if($request->cart_id != $cart->id){
+                $notificacion = 'error al procesar el pedido';
+                $status = 'error';
+                return back()->with(compact('notificacion','status'));
+            }else{
+                $order_date = new Carbon($request->order_date);
+
+                $cart->status = 2;
+                $cart->order_date = $order_date;
+                $cart->save();
+
+                $admins = User::where('admin',true)->get();
+
+                Mail::to($admins)->send(new NewOrder($cart,$client));
+
+                $notificacion = 'Pedido procesado, en espera de confirmación';
+                $status = 'success';
+                return back()->with(compact('notificacion','status'));
+            }
+        }else{
+            $notificacion = 'El carrito no puede estar vacío';
             $status = 'error';
             return back()->with(compact('notificacion','status'));
         }
 
-        $order_date = new Carbon($request->order_date);
-
-        $cart->status = 2;
-        $cart->order_date = $order_date;
-        $cart->save();
-
-        $notificacion = 'Pedido procesado, en espera de confirmación';
-        $status = 'success';
-        return back()->with(compact('notificacion','status'));
     }
 
     /**

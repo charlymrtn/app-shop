@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Bienvenid@ a Pájaro Shop')
+@section('title','Bienvenid@ a '.config('app.name'))
 
 @section('body-class','landing-page sidebar-collapse')
 
@@ -38,7 +38,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <h1 class="title">Bienvenid@ al Mercado del Pájaro</h1>
+          <h1 class="title">Bienvenid@ a {{config('app.name')}}</h1>
           <h4>Un lugar especial para esa persona especial..., Realiza pedidos y te contactarémos para coordinar la entrega.</h4>
           <br>
           <a href="#" target="_blank" class="btn btn-danger btn-raised btn-lg">

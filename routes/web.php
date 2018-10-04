@@ -24,17 +24,21 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
     Route::get('products/{product}/images/{image}/featured','ImageController@featured')->name('images.featured');
 
     Route::resource('categories','CategoryController')->except('show');
+    Route::resource('order','OrderController');
+
+});
+
+Route::middleware(['auth'])->namespace('Product')->group(function() {
+    Route::get('query','ProductController@query')->name('query');
+    Route::get('products/json','ProductController@json')->name('products.json');
+
+    Route::get('products/{product}','ProductController@show')->name('products.show');
+    Route::get('categories/{category}','CategoryController@show')->name('categories.show');
+    Route::resource('cart', 'CartDetailController');
+
 });
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('query','Product\ProductController@query')->name('query');
-    Route::get('products/json','Product\ProductController@json')->name('products.json');
-
-    Route::get('products/{product}','Product\ProductController@show')->name('products.show');
-    Route::get('categories/{category}','Product\CategoryController@show')->name('categories.show');
     Route::get('/', 'HomeController@welcome');
 
-    Route::resource('cart', 'Cart\CartDetailController');
-
 });
-
