@@ -6,7 +6,11 @@
     <div class="col-md-6 ml-auto mr-auto">
     <div class="profile">
         <div class="avatar">
-            <img src="{{$product->featured_image}}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+            @if (substr($product->featured_image,0,4) === 'http')
+            <img src="{{$product->featured_image}}" alt="{{$product->name}}" class="img-raised rounded-circle img-fluid">
+            @else
+            <img src="{{asset($product->featured_image)}}" alt="{{$product->name}}" class="img-raised rounded-circle img-fluid">
+            @endif
         </div>
         <div class="name">
             <h3 class="title">{{$product->name}}</h3>

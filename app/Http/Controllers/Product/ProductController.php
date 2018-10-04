@@ -127,8 +127,13 @@ class ProductController extends Controller
     {
         $query = $request->input('query');
         $products = Product::where('name','like',"%$query%")->paginate(9);
-        $metodo = 'results';
 
+        if($products->count() == 1){
+            $id = $products->first()->id;
+            return redirect()->route('products.show',$id);
+        }
+
+        $metodo = 'results';
         return view('admin.products.index',compact('products','metodo','query'));
     }
 
