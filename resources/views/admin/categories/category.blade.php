@@ -19,7 +19,7 @@
             @if ($metodo == 'crear')
                 @include('forms.categories.create')
             @elseif ($metodo == 'profile')
-                @include('profile.product')
+                @include('profile.category')
             @else
                 @include('forms.categories.edit')
             @endif

@@ -23,10 +23,10 @@
                         <td>{{($key+1)}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->description}}</td>
-                        <td>{{$product->category ? $product->category->name : 'General'}}</td>
+                        <td>{{$product->category_name}}</td>
                         <td>${{$product->price}}</td>
                         <td class="td-actions">
-                            <a href="{{route('products.show',$product->id)}}" rel="tooltip" title="Detalles" class="btn btn-info btn-simple btn-xs">
+                            <a href="{{route('products.show',$product->id)}}" rel="tooltip" title="Detalles" class="btn btn-info btn-simple btn-xs" target="_blank">
                                 <i class="fa fa-info"></i>
                             </a>
                             <a href="{{route('products.edit',$product->id)}}" rel="tooltip" title="Editar" class="btn btn-success btn-simple btn-xs">

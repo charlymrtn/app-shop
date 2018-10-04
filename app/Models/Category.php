@@ -31,4 +31,13 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getFeaturedImageAttribute()
+    {
+        $featured = $this->products()->first();
+
+        if($featured) return $featured->featured_image;
+
+        return 'images/products/default.jpg';
+    }
 }

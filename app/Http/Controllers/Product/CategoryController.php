@@ -40,9 +40,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->validate($request,Category::$rules,Category::$messages);
-        
+
         //registrar nueva categoria
         $category = Category::create($request->all());
 
@@ -61,6 +61,11 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        $metodo = 'profile';
+
+        $products = $category->products()->paginate(9);
+
+        return view('admin.categories.category',compact('metodo','products','category')); //formulario
     }
 
     /**
@@ -85,7 +90,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $this->validate($request,Category::$rules,Category::$messages);
-        
+
         //registrar nueva categoria
         $category->update($request->all());
 

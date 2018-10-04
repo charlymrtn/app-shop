@@ -1,24 +1,23 @@
 <div class="section text-center">
-    <h2 class="title">Productos disponibles</h2>
+    <h2 class="title">Categorías disponibles</h2>
+
     @include('extras.browser')
+
     <div class="team">
         <div class="row">
-            @foreach ($products as $product)
+            @foreach ($categories as $category)
                 <div class="col-md-4">
                     <div class="team-player">
                         <div class="card card-plain">
                             <div class="col-md-6 ml-auto mr-auto">
-                                <img src="{{$product->featured_image}}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                                <img src="{{$category->featured_image}}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                             </div>
                             <h4 class="card-title">
-                                <a href="{{route('products.show',$product->id)}}">{{$product->name}}</a>
+                                <a href="{{route('categories.show',$category->id)}}">{{$category->name}}</a>
                                 <br>
-                                <small class="card-description text-muted">
-                                    {{ $product->category_name }}
-                                </small>
                             </h4>
                             <div class="card-body">
-                                <p class="card-description">{{$product->description}}</p>
+                                <p class="card-description">{{$category->description}}</p>
                             </div>
                         </div>
                     </div>
@@ -26,7 +25,7 @@
             @endforeach
         </div>
         <div class="text-center">
-            {{$products->links()}}
+            {{$categories->links()}}
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -28,7 +29,8 @@ class ProductController extends Controller
     public function create()
     {
         $metodo = 'crear';
-        return view('admin.products.product',compact('metodo')); //formulario
+        $categories = Category::orderBy('name')->get();
+        return view('admin.products.product',compact('metodo','categories')); //formulario
     }
 
     /**
@@ -80,7 +82,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $metodo = 'editar';
-        return view('admin.products.product',compact('metodo','product')); //formulario
+        $categories = Category::orderBy('name', 'ASC')->get();
+        return view('admin.products.product',compact('metodo','product','categories')); //formulario
     }
 
     /**
@@ -92,7 +95,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        
+
         $this->validate($request,Product::$rules,Product::$messages);
         //
         $product->update($request->all());

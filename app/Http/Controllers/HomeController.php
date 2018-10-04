@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 use Auth;
 
 class HomeController extends Controller
@@ -39,7 +40,8 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $products = Product::paginate(9);
-        return view('welcome', compact('products'));
+        $products = Product::orderBy('name')->paginate(9);
+        $categories = Category::orderBy('name')->has('products')->paginate(9);
+        return view('welcome', compact('products','categories'));
     }
 }

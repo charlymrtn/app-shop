@@ -17,11 +17,23 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="description">Descripción corta.</label>
-                    <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="description">Descripción corta.</label>
+                        <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="category_id">Categoría.</label>
+                        <select name="category_id" id="category_id" class="form-control" value="{{old('category_id')}}">
+                            <option value="0" disabled selected>Selecciona una categoría</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
 

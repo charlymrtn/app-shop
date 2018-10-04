@@ -10,7 +10,7 @@ class Product extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = ['name','description','price','long_description'];
+    protected $fillable = ['name','description','price','long_description','category_id'];
 
     public static $messages = [
         'name.required' => 'El nombre es obligatorio.',
@@ -20,12 +20,16 @@ class Product extends Model
         'price.required' => 'El precio es obligatorio.',
         'price.numeric' => 'El precio tiene que ser númerico.',
         'price.min' => 'El precio no puede ser menor a cero.',
+        'category_id.required' => 'La categoría es requerida.',
+        'category_id.numeric' => 'La categoría debe ser un número.',
+        'category_id.min' => 'Selecciona una categoría.'
     ];
 
     public static $rules = [
         'name' => 'required|min:3',
         'description' => 'required|max:100',
-        'price' => 'required|numeric|min:0'
+        'price' => 'required|numeric|min:0',
+        'category_id' => 'required|numeric|min:1'
     ];
 
     protected $dates = ['deleted_at'];
@@ -49,5 +53,12 @@ class Product extends Model
         if($featured) return $featured->url;
 
         return 'images/products/default.jpg';
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        if($this->category) return $this->category->name;
+
+        return 'General';
     }
 }

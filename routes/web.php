@@ -23,11 +23,12 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
     Route::delete('products/{id}/images','ImageController@destroy')->name('images.destroy');
     Route::get('products/{product}/images/{image}/featured','ImageController@featured')->name('images.featured');
 
-    Route::resource('categories','CategoryController');
+    Route::resource('categories','CategoryController')->except('show');
 });
 
 Route::middleware(['auth'])->group(function() {
     Route::get('products/{product}','Product\ProductController@show')->name('products.show');
+    Route::get('categories/{category}','Product\CategoryController@show')->name('categories.show');
     Route::get('/', 'HomeController@welcome');
 
     Route::resource('cart', 'Cart\CartDetailController');

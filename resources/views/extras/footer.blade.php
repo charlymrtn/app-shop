@@ -19,7 +19,7 @@
             <script>
                 document.write(new Date().getFullYear())
             </script>, hecho con <i class="material-icons">favorite</i> Por
-            <a href="https://github.com/charlymrtn" target="_blank">Carlos Martín</a>.
+            <a href="https://twitter.com/charlie_mrtn" target="_blank">Carlos Martín</a>.
         </div>
     </div>
 </footer>

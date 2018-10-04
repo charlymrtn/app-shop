@@ -32,6 +32,8 @@
     <div class="container">
         @include('extras.section-main')
 
+        @include('extras.section-categories')
+
         @include('extras.section-products')
 
         @include('extras.section-contact')

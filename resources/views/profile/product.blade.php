@@ -26,6 +26,9 @@
     <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#addCart">
         <i class="material-icons">add</i> Añadir al carrito
     </button>
+    <a href="{{ URL::previous() }}" class="btn btn-primary btn-round">
+        <i class="material-icons">backspace</i> Regresar
+    </a>
 </div>
 
 @include('extras.errors')
