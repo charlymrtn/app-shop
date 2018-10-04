@@ -131,4 +131,11 @@ class ProductController extends Controller
 
         return view('admin.products.index',compact('products','metodo','query'));
     }
+
+    public function json()
+    {
+        $products = Product::pluck('name');
+
+        return $products;
+    }
 }

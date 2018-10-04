@@ -5,12 +5,32 @@
 @section('body-class','landing-page sidebar-collapse')
 
 @section('styles')
-    <style>
-      .team .row .col-md-4 {
-        margin-bottom: 1em;
-      }
-      .pagination {text-align: center;}
-    </style>
+    <link href="{{asset('css/custom-styles.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/typeahead.css')}}" rel="stylesheet" />
+@endsection
+
+@section('scripts')
+    <script src="{{asset('js/typeahead.bundle.min.js')}}" type="text/javascript"></script>
+    <script>
+        $(function () {
+            var products = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+                prefetch: "{{route('products.json')}}"
+                });
+
+                $('#query').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'products',
+                source: products
+            });
+        });
+    </script>
 @endsection
 
 @section('content')

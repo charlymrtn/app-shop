@@ -27,11 +27,12 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
 });
 
 Route::middleware(['auth'])->group(function() {
+    Route::get('query','Product\ProductController@query')->name('query');
+    Route::get('products/json','Product\ProductController@json')->name('products.json');
+
     Route::get('products/{product}','Product\ProductController@show')->name('products.show');
     Route::get('categories/{category}','Product\CategoryController@show')->name('categories.show');
     Route::get('/', 'HomeController@welcome');
-
-    Route::get('query','Product\ProductController@query')->name('query');
 
     Route::resource('cart', 'Cart\CartDetailController');
 
