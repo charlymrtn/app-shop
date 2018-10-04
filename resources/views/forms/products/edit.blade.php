@@ -1,14 +1,6 @@
 <div class="section text-center">
         <h2 class="title">Producto {{$product->name}}</h2>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('extras.errors')
         <form action="{{route('products.update',$product->id)}}" method="POST">
             @csrf
             @method('PUT')

@@ -53,13 +53,9 @@ class CategoryController extends Controller
         ];
 
         $this->validate($request,$rules,$messages);
-        //registrar nuevos productos
-        $category = new Category();
-
-        $category->name = $request->name;
-        $category->description = $request->description;
-
-        $category->save();
+        
+        //registrar nueva categoria
+        $category = Category::create($request->all());
 
         $notificacion = 'La categoría fue creada correctamente.';
         $status = 'success';
@@ -86,7 +82,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $metodo = 'editar';
+        return view('admin.categories.category',compact('metodo','category')); //formulario
     }
 
     /**
@@ -98,7 +95,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $messages = [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.min' => 'El nombre debe tener al menos 3 carácteres.',
+            'description.required' => 'La descripción es obligatorio.',
+            'description.max' => 'La descripción no puede exceder los 250 carácteres.'
+        ];
+
+        $rules = [
+            'name' => 'required|min:3',
+            'description' => 'required|max:250'
+        ];
+
+        $this->validate($request,$rules,$messages);
+        
+        //registrar nueva categoria
+        $category->update($request->all());
+
+        $notificacion = 'La categoría fue editada correctamente.';
+        $status = 'success';
+
+        return redirect()->route('categories.index')->with(compact('notificacion','status'));
     }
 
     /**
@@ -109,6 +126,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        $notificacion = 'La categoría fue eliminada correctamente.';
+        $status = 'success';
+        return redirect()->back()->with(compact('notificacion','status'));
     }
 }
