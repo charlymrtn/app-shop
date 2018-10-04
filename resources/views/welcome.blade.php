@@ -34,7 +34,7 @@
 
         @include('extras.section-categories')
 
-        @include('extras.section-products')
+        {{--  @include('extras.section-products')  --}}
 
         @include('extras.section-contact')
 

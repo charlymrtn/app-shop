@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('categories/{category}','Product\CategoryController@show')->name('categories.show');
     Route::get('/', 'HomeController@welcome');
 
+    Route::get('query','Product\ProductController@query')->name('query');
+
     Route::resource('cart', 'Cart\CartDetailController');
 
 });

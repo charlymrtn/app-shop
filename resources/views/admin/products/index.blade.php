@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Lista de productos')
+@if (!$metodo) @section('title','Lista de productos') @else @section('title','resultados de busqueda') @endif
 
 @section('body-class','profile-page sidebar-collapse')
 
@@ -11,14 +11,16 @@
     <div class="main main-raised">
         <div class="container">
 
-            @include('admin.products.section-products')
+            @if ($metodo == 'products') @include('admin.products.section-products') @else @include('extras.section-results') @endif
 
         </div>
     </div>
 
-    @foreach ($products as $product)
-        @include('modal.delete-product')
-    @endforeach
+    @if ($metodo == 'products')
+        @foreach ($products as $product)
+            @include('modal.delete-product')
+        @endforeach
+    @endif
 
     @include('extras.footer')
 @endsection

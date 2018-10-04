@@ -18,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('name')->paginate(10);
-        return view('admin.products.index',compact('products')); //listado de producto
+        $metodo = 'products';
+        return view('admin.products.index',compact('products','metodo')); //listado de producto
     }
 
     /**
@@ -120,5 +121,14 @@ class ProductController extends Controller
         $notificacion = 'El producto fue eliminado correctamente.';
         $status = 'success';
         return redirect()->back()->with(compact('notificacion','status'));
+    }
+
+    public function query(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::where('name','like',"%$query%")->paginate(9);
+        $metodo = 'results';
+
+        return view('admin.products.index',compact('products','metodo','query'));
     }
 }
