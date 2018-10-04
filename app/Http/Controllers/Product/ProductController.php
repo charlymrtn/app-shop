@@ -43,7 +43,7 @@ class ProductController extends Controller
             'name.required' => 'El nombre es obligatorio.',
             'name.min' => 'El nombre debe tener al menos 3 carácteres.',
             'description.required' => 'La descripción es obligatorio.',
-            'description.max' => 'La descripción no puede exceder los 50 carácteres.',
+            'description.max' => 'La descripción no puede exceder los 100 carácteres.',
             'price.required' => 'El precio es obligatorio.',
             'price.numeric' => 'El precio tiene que ser númerico.',
             'price.min' => 'El precio no puede ser menor a cero.',
@@ -66,7 +66,10 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index');
+        $notificacion = 'El producto fue creado correctamente.';
+        $status = 'success';
+
+        return redirect()->route('products.index')->with(compact('notificacion','status'));
     }
 
     /**
@@ -136,7 +139,10 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index');
+        $notificacion = 'El producto fue editado correctamente.';
+        $status = 'success';
+
+        return redirect()->route('products.index')->with(compact('notificacion','status'));
 
     }
 

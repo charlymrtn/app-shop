@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @if ($metodo == 'crear')
-    @section('title','Guardar Producto')
+    @section('title','Guardar Categoría')
 @elseif ($metodo == 'profile')
-    @section('title','Ver Producto')
+    @section('title','Ver Categoría')
 @else
-    @section('title','Editar Producto')
+    @section('title','Editar Categoría')
 @endif
 
 @section('body-class','profile-page sidebar-collapse')
@@ -17,11 +17,11 @@
         <div class="container">
 
             @if ($metodo == 'crear')
-                @include('forms.products.create')
+                @include('forms.categories.create')
             @elseif ($metodo == 'profile')
                 @include('profile.product')
             @else
-                @include('forms.products.edit')
+                @include('forms.categories.edit')
             @endif
 
         </div>

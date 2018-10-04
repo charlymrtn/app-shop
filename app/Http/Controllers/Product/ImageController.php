@@ -21,7 +21,7 @@ class ImageController extends Controller
         $product = Product::find($id);
         $images = $product->images()->orderBy('featured','desc')->get();
         Session::put('product_id',$product->id);
-        return view('admin.images.index',compact('product','images'));
+        return view('admin.products.images.index',compact('product','images'));
     }
 
     public function store(Request $request, $id)
