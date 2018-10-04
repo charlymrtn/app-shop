@@ -12,6 +12,18 @@ class Category extends Model
 
     protected $fillable = ['name','description'];
 
+    public static $messages = [
+        'name.required' => 'El nombre es obligatorio.',
+        'name.min' => 'El nombre debe tener al menos 3 carácteres.',
+        'description.required' => 'La descripción es obligatorio.',
+        'description.max' => 'La descripción no puede exceder los 250 carácteres.'
+    ];
+
+    public static $rules = [
+        'name' => 'required|min:3',
+        'description' => 'required|max:250'
+    ];
+
     protected $dates = ['deleted_at'];
     protected $hidden = ['updated_at','deleted_at'];
 

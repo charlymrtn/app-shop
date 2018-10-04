@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::orderBy('name')->paginate(10);
         return view('admin.categories.index',compact('categories')); //listado de producto
     }
 
@@ -40,19 +40,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.min' => 'El nombre debe tener al menos 3 carácteres.',
-            'description.required' => 'La descripción es obligatorio.',
-            'description.max' => 'La descripción no puede exceder los 250 carácteres.'
-        ];
-
-        $rules = [
-            'name' => 'required|min:3',
-            'description' => 'required|max:250'
-        ];
-
-        $this->validate($request,$rules,$messages);
+        
+        $this->validate($request,Category::$rules,Category::$messages);
         
         //registrar nueva categoria
         $category = Category::create($request->all());
@@ -95,19 +84,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $messages = [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.min' => 'El nombre debe tener al menos 3 carácteres.',
-            'description.required' => 'La descripción es obligatorio.',
-            'description.max' => 'La descripción no puede exceder los 250 carácteres.'
-        ];
-
-        $rules = [
-            'name' => 'required|min:3',
-            'description' => 'required|max:250'
-        ];
-
-        $this->validate($request,$rules,$messages);
+        $this->validate($request,Category::$rules,Category::$messages);
         
         //registrar nueva categoria
         $category->update($request->all());
