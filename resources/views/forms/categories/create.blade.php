@@ -1,7 +1,7 @@
 <div class="section text-center">
     <h2 class="title">Registrar Nueva Categoría</h2>
     @include('extras.errors')
-    <form action="{{route('categories.store')}}" method="POST">
+    <form action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-sm-4">
@@ -9,6 +9,10 @@
                     <label for="name">Nombre de la Categoría.</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                 </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="image">Imágen.</label>
+                <input type="file" id="image" name="image">
             </div>
         </div>
 

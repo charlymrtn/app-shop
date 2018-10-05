@@ -1,7 +1,7 @@
 <div class="section text-center">
     <h2 class="title">Categoría {{$category->name}}</h2>
     @include('extras.errors')
-    <form action="{{route('categories.update',$category->id)}}" method="POST">
+    <form action="{{route('categories.update',$category->id)}}" method="POST" enctype="multipart/form-data"
         @csrf
         @method('PUT')
         <div class="row">
@@ -10,6 +10,10 @@
                     <label for="name">Nombre de Categoría.</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{old('name',$category->name)}}">
                 </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="image">Imágen.</label>
+                <input type="file" id="image" name="image">
             </div>
         </div>
 
