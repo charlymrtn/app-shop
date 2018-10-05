@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($details as $detail)
+        @foreach ($cart->details as $detail)
             <tr>
                 <td><img src="{{$detail->product->featured_image}}" alt="" width="150"></td>
                 <td><a href="{{route('products.show',$detail->product->id)}}">{{$detail->product->name}}</a></td>
@@ -44,8 +44,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{{$totalPiezas}}</td>
-            <td>${{$total}}</td>
+            <td>{{$cart->pieces}}</td>
+            <td>${{$cart->total}}</td>
         </tr>
     </tbody>
 </table>

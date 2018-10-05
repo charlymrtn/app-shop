@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>Nuevo Pedido</title>
+        <title>Pedido Confirmado.</title>
     </head>
     <body>
-        <p>Se ha realizado un nuevo pedido</p>
-        <p>Estos son los datos del cliente que realizó el pedido:</p>
+        <p>Tú pedido ha sido recibido</p>
+        <p>Estos son los datos de tú pedido:</p>
         <ul>
             <li>
                <strong>Nombre:</strong>
@@ -34,9 +34,5 @@
             <strong>Importe a pagar:</strong> {{$cart->total}}
         </p>
         <hr>
-        <p>
-            <a href="{{route('order.show',$cart->id)}}">Haz clic aquí</a>
-            Para ver mas información sobre este pedido.
-        </p>
     </body>
 </html>

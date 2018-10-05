@@ -9,12 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Models\Cart;
 
-class NewOrder extends Mailable
+class ConfirmOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $cart;
-
 
     /**
      * Create a new message instance.
@@ -23,7 +22,9 @@ class NewOrder extends Mailable
      */
     public function __construct(Cart $cart)
     {
+        //
         $this->cart = $cart;
+
     }
 
     /**
@@ -34,7 +35,7 @@ class NewOrder extends Mailable
     public function build()
     {
         return $this->subject('Nuevo Pedido')
-            ->view('mails.new-order')->with([
+            ->view('mails.confirm-order')->with([
             'cart' => $this->cart
         ]);
     }

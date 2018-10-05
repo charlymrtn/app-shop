@@ -1,5 +1,5 @@
 @section('modal')
-    @foreach ($details as $detail)
+    @foreach ($cart->details as $detail)
         @include('modal.delete-detail')
     @endforeach
     @include('modal.add-date')
@@ -44,7 +44,7 @@
         </li>
     </ul>
     <hr>
-    <h4>Tu carrito de compras presenta {{count($details)}} productos</h4>
+    <h4>Tu carrito de compras presenta {{$cart->details->count()}} productos</h4>
 
     @include('cart.tables.details')
 

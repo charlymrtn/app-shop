@@ -27,21 +27,14 @@ class HomeController extends Controller
     public function index()
     {
         $cart = Auth::user()->cart;
-        $details = $cart->details;
-        $totalPiezas = 0;
-        $total = 0;
-        foreach ($details as $detail) {
-            # code...
-            $totalPiezas = $totalPiezas + $detail->quantity;
-            $total = $total + ($detail->quantity*$detail->product->price);
-        }
-        return view('home',compact('cart','details','totalPiezas','total'));
+
+        return view('home',compact('cart'));
     }
 
     public function welcome()
     {
-        $products = Product::orderBy('name')->paginate(9);
+        //$products = Product::orderBy('name')->paginate(9);
         $categories = Category::orderBy('name')->has('products')->paginate(9);
-        return view('welcome', compact('products','categories'));
+        return view('welcome', compact('categories'));
     }
 }

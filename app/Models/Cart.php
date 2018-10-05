@@ -37,4 +37,26 @@ class Cart extends Model
 
         return $date->format('d/m/Y');;
     }
+
+    public function getTotalAttribute()
+    {
+        $total = 0;
+        foreach ($this->details as $detail) {
+            # code...
+            $total += $detail->quantity * $detail->product->price;
+        }
+
+        return $total;
+    }
+
+    public function getPiecesAttribute()
+    {
+        $pieces = 0;
+        foreach ($this->details as $detail) {
+            # code...
+            $pieces += $detail->quantity;
+        }
+
+        return $pieces;
+    }
 }

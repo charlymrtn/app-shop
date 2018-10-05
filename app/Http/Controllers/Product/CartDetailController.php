@@ -11,6 +11,7 @@ use Carbon\Carbon;
 
 use Mail;
 use App\Mail\NewOrder;
+use App\Mail\ConfirmOrder;
 use App\User;
 
 class CartDetailController extends Controller
@@ -148,6 +149,7 @@ class CartDetailController extends Controller
                 $admins = User::where('admin',true)->get();
 
                 Mail::to($admins)->send(new NewOrder($cart,$client));
+                Mail::to($client)->send(new ConfirmOrder($cart,$client));
 
                 $notificacion = 'Pedido procesado, en espera de confirmación';
                 $status = 'success';
