@@ -12,13 +12,22 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
+                        <th>Imagén</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($categories as $key => $category)
                     <tr>
-                        <td>{{($key+1)}}</td>
+                        <td>
+                            <img
+                                @if (substr($category->featured_image,0,4) === 'http')
+                                    src="{{$category->featured_image}}"
+                                @else
+                                    src="{{asset($category->featured_image)}}"
+                                @endif
+                            alt="{{$category->name}}" class="rounded-circle" height="50">
+                        </td>
                         <td>{{$category->name}}</td>
                         <td>{{$category->description}}</td>
                         <td class="td-actions">

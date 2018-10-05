@@ -34,10 +34,14 @@ class Category extends Model
 
     public function getFeaturedImageAttribute()
     {
+        $featured = $this->image;
+
+        if($featured) return $featured;
+
         $featured = $this->products()->first();
 
         if($featured) return $featured->featured_image;
 
-        return 'images/products/default.jpg';
+        return 'images/default.jpg';
     }
 }

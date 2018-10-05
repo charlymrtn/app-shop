@@ -2,11 +2,13 @@
     <div class="col-md-6 ml-auto mr-auto">
     <div class="profile">
         <div class="avatar">
-            @if (substr($category->featured_image,0,4) === 'http')
-            <img src="{{$category->featured_image}}" alt="{{$category->name}}" class="img-raised rounded-circle img-fluid">
-            @else
-            <img src="{{asset($category->featured_image)}}" alt="{{$category->name}}" class="img-raised rounded-circle img-fluid">
-            @endif
+            <img
+                @if (substr($category->featured_image,0,4) === 'http')
+                    src="{{$category->featured_image}}"
+                @else
+                    src="{{asset($category->featured_image)}}"
+                @endif
+            alt="{{$category->name}}" class="img-raised rounded-circle img-fluid">
         </div>
         <div class="name">
             <h3 class="title">{{$category->name}}</h3>

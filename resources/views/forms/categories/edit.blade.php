@@ -1,7 +1,16 @@
 <div class="section text-center">
     <h2 class="title">Categoría {{$category->name}}</h2>
+    <div class="avatar">
+        <img
+        @if (substr($category->featured_image,0,4) === 'http')
+            src="{{$category->featured_image}}"
+        @else
+            src="{{asset($category->featured_image)}}"
+        @endif
+        alt="{{$category->name}}" class="img-raised rounded-circle img-fluid">
+    </div>
     @include('extras.errors')
-    <form action="{{route('categories.update',$category->id)}}" method="POST" enctype="multipart/form-data"
+    <form action="{{route('categories.update',$category->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">

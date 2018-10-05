@@ -52,7 +52,7 @@ class Product extends Model
 
         if($featured) return $featured->url;
 
-        return 'images/products/default.jpg';
+        return 'images/default.jpg';
     }
 
     public function getCategoryNameAttribute()
