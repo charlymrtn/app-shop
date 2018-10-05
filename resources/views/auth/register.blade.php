@@ -14,17 +14,6 @@
 
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Registro</h4>
-                            {{-- <div class="social-line">
-                                <a href="#pablo" class="btn btn-just-icon btn-link">
-                                    <i class="fa fa-facebook-square"></i>
-                                </a>
-                                <a href="#pablo" class="btn btn-just-icon btn-link">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                                <a href="#pablo" class="btn btn-just-icon btn-link">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                            </div> --}}
                         </div>
 
                         <p class="description text-center">Completa tus datos</p>
@@ -38,7 +27,7 @@
                                     </span>
                                 </div>
 
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nombre completo..." required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name',$name) }}" placeholder="Nombre completo..." required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +43,7 @@
                                     </span>
                                 </div>
 
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email..." required autofocus>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email',$email) }}" placeholder="Email..." required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">

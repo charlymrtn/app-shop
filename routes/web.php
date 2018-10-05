@@ -11,9 +11,9 @@
 |
 */
 
-Auth::routes();
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
 
 Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->group(function () {
     Route::resource('products','ProductController')->except('show');
@@ -39,6 +39,6 @@ Route::middleware(['auth'])->namespace('Product')->group(function() {
 });
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('/', 'HomeController@welcome');
+    Route::get('/home', 'HomeController@index')->name('home');
 
 });
