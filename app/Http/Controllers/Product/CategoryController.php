@@ -172,14 +172,16 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
 
-        $deleted = true;
-        $fullPath = public_path().'/'.$category->image;
-        $deleted = File::delete($fullPath);
+        if($category->image){
+            $deleted = true;
+            $fullPath = public_path().'/'.$category->image;
+            $deleted = File::delete($fullPath);
 
-        if(!$deleted){
-            $notificacion = 'La categoría no pudo ser eliminada.';
-            $status = 'error';
-            return redirect()->back()->with(compact('notificacion','status'));
+            if(!$deleted){
+                $notificacion = 'La categoría no pudo ser eliminada.';
+                $status = 'error';
+                return redirect()->back()->with(compact('notificacion','status'));
+            }
         }
 
         $category->delete();
