@@ -23,6 +23,7 @@
             <div class="col-sm-4">
                 <label for="image">Imágen.</label>
                 <input type="file" id="image" name="image">
+                <p class="help-block">Subir solo si se desea modificar la imágen actual.</p>
             </div>
         </div>
 

@@ -117,7 +117,7 @@ class CategoryController extends Controller
     {
         $this->validate($request,Category::$rules,Category::$messages);
 
-        //registrar nueva categoria
+        //editar categoria
         $category->update($request->only('name','description'));
 
         if($request->hasFile('image')){
@@ -143,7 +143,6 @@ class CategoryController extends Controller
 
             if($moved){
                 $category->image = 'images/categories/' . $filename;
-
                 $category->save();
 
                 $notificacion = 'La categoría fue editada correctamente.';
