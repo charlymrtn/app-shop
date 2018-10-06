@@ -99,6 +99,15 @@ class ProductController extends Controller
 
         $this->validate($request,Product::$rules,Product::$messages);
         //
+        if($request->has('stock')){
+            $stock = $request->stock;
+            if($stock < $product->stock){
+                $notificacion = 'El número de piezas no puede ser menor al actual, las piezas solo salen en ventas.';
+                $status = 'error';
+
+                return redirect()->route('products.edit',$product->id)->with(compact('notificacion','status'));
+            }
+        }
         $product->update($request->all());
 
         $notificacion = 'El producto fue editado correctamente.';

@@ -26,7 +26,7 @@
             @foreach ($cart->details as $detail)
             <li>
                 {{$detail->product->name}} x {{$detail->quantity}}
-                ($ {{$detail->quantity * $detail->product->price}})
+                ($ {{$detail->quantity * $detail->price}})
             </li>
             @endforeach
         </ul>

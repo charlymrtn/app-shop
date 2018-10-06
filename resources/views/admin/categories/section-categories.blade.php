@@ -12,7 +12,7 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Imagén</th>
+                        <th># de Productos</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -30,6 +30,7 @@
                         </td>
                         <td>{{$category->name}}</td>
                         <td>{{$category->description}}</td>
+                        <td>{{$category->products()->count()}}</td>
                         <td class="td-actions">
                             <a href="{{route('categories.show',$category->id)}}" rel="tooltip" title="Detalles" class="btn btn-info btn-simple btn-xs">
                                 <i class="fa fa-info"></i>

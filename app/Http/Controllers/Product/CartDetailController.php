@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\CartDetail as Detail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,6 +56,17 @@ class CartDetailController extends Controller
 
         $detail = Detail::where('cart_id',$cart_id)->where('product_id',$request->product_id)->first();
 
+        $product = Product::where('id',$request->product_id)->first();
+
+        if($request->quantity > $product->stock){
+            $notificacion = 'inventario insuficiente.';
+            $status = 'error';
+            return back()->with(compact('notificacion','status'));
+        }
+
+        $product->stock -= $request->quantity;
+        $product->save();
+
         if($detail){
             $detail->quantity = $detail->quantity + $request->quantity;
             if($detail->quantity > 10){
@@ -67,6 +79,8 @@ class CartDetailController extends Controller
             $detail = new Detail();
             $detail->cart_id = Auth::user()->cart->id;
             $detail->product_id = $request->product_id;
+            $product = Product::find($detail->product_id);
+            $detail->price = $product->price;
             $detail->quantity = $request->quantity;
             $detail->save();
         }

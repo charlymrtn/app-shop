@@ -10,7 +10,7 @@ class Product extends Model
     //
     use SoftDeletes;
 
-    protected $fillable = ['name','description','price','long_description','category_id'];
+    protected $fillable = ['name','description','price','long_description','category_id','stock'];
 
     public static $messages = [
         'name.required' => 'El nombre es obligatorio.',
@@ -22,14 +22,19 @@ class Product extends Model
         'price.min' => 'El precio no puede ser menor a cero.',
         'category_id.required' => 'La categoría es requerida.',
         'category_id.numeric' => 'La categoría debe ser un número.',
-        'category_id.min' => 'Selecciona una categoría.'
+        'category_id.min' => 'Selecciona una categoría.',
+        'stock.required' => 'las piezas son requeridas',
+        'stock.numeric' => 'las piezas son númericas',
+        'stock.min' => 'las piezas deben ser mínimo un@',
+        'stock.max' => 'las piezas deben ser máximo 1000',
     ];
 
     public static $rules = [
         'name' => 'required|min:3',
         'description' => 'required|max:100',
         'price' => 'required|numeric|min:0',
-        'category_id' => 'required|numeric|min:1'
+        'category_id' => 'required|numeric|min:1',
+        'stock' => 'required|numeric|min:1|max:1000',
     ];
 
     protected $dates = ['deleted_at'];

@@ -17,8 +17,8 @@
                 <td><a href="{{route('products.show',$detail->product->id)}}">{{$detail->product->name}}</a></td>
                 <td>{{$detail->product->category ? $detail->product->category->name : 'General'}}</td>
                 <td>{{$detail->quantity}}</td>
-                <td>${{$detail->product->price}}</td>
-                <td>${{($detail->product->price)*($detail->quantity)}}</td>
+                <td>${{$detail->price}}</td>
+                <td>${{($detail->price)*($detail->quantity)}}</td>
                 <td class="td-actions">
                     <a href="{{route('products.show',$detail->product->id)}}" target="_blank" rel="tooltip" title="Ver producto" class="btn btn-info btn-simple btn-xs">
                         <i class="fa fa-info"></i>

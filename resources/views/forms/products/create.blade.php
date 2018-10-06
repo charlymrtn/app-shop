@@ -1,6 +1,7 @@
 <div class="section text-center">
         <h2 class="title">Registrar Nuevo Producto</h2>
         @include('extras.errors')
+        @include('extras.notifications')
         <form action="{{route('products.store')}}" method="POST">
             @csrf
             <div class="row">
@@ -14,6 +15,12 @@
                     <div class="form-group">
                         <label for="price">Precio de producto.</label>
                         <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{old('price')}}">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="stock">Piezas en inventario.</label>
+                        <input type="number" class="form-control" id="stock" name="stock" value="{{old('stock')}}">
                     </div>
                 </div>
             </div>

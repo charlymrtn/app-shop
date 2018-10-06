@@ -11,8 +11,8 @@
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>Categoría</th>
+                        <th>Piezas existentes.</th>
                         <th>Precio</th>
                         <th>Opciones</th>
                     </tr>
@@ -20,10 +20,18 @@
                 <tbody>
                     @foreach ($products as $key => $product)
                     <tr>
-                        <td>{{($key+1)}}</td>
+                        <td>
+                            <img
+                                @if (substr($product->featured_image,0,4) === 'http')
+                                    src="{{$product->featured_image}}"
+                                @else
+                                    src="{{asset($product->featured_image)}}"
+                                @endif
+                            alt="{{$product->name}}" class="rounded-circle" height="50">
+                        </td>
                         <td>{{$product->name}}</td>
-                        <td>{{$product->description}}</td>
                         <td>{{$product->category_name}}</td>
+                        <td>{{$product->stock}}</td>
                         <td>${{$product->price}}</td>
                         <td class="td-actions">
                             <a href="{{route('products.show',$product->id)}}" rel="tooltip" title="Detalles" class="btn btn-info btn-simple btn-xs" target="_blank">
