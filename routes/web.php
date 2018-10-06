@@ -29,13 +29,17 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
 });
 
 Route::middleware(['auth'])->namespace('Product')->group(function() {
+
+    Route::resource('cart', 'CartDetailController')->only('store','update','destroy');
+
+});
+
+Route::namespace('Product')->group(function () {
     Route::get('query','ProductController@query')->name('query');
     Route::get('products/json','ProductController@json')->name('products.json');
 
     Route::get('products/{product}','ProductController@show')->name('products.show');
     Route::get('categories/{category}','CategoryController@show')->name('categories.show');
-    Route::resource('cart', 'CartDetailController');
-
 });
 
 Route::middleware(['auth'])->group(function() {

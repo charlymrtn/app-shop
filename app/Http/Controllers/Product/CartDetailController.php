@@ -16,24 +16,15 @@ use App\User;
 
 class CartDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Show the form for creating a new resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function create()
+    public function __construct()
     {
-        //
+        //$this->middleware('auth');
     }
 
     /**
@@ -83,28 +74,6 @@ class CartDetailController extends Controller
         $notificacion = 'El producto fue añadido al carrito.';
         $status = 'success';
         return back()->with(compact('notificacion','status'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
     }
 
     /**

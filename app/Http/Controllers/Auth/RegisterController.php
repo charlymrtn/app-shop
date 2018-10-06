@@ -49,11 +49,29 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $rules = [
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'phone' => 'required|string|max:15|min:10',
+            'address' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:3|confirmed',
-        ]);
+        ];
+        $messages = [
+            'name.required' => 'Campo obligatorio',
+            'username.required' => 'Campo obligatorio',
+            'email.required' => 'Campo obligatorio',
+            'password.required' => 'Campo obligatorio',
+            'phone.required' => 'Campo obligatorio',
+            'address.required' => 'Campo obligatorio',
+            'username.unique' => 'este usuario ya ha sido tomado.',
+            'email.unique' => 'este correo ya ha sido usado.',
+            'password.min' => 'la contraseña debe de ser mínimo de 3 carácteres',
+            'password.confirmed' => 'las contraseñas no coínciden',
+            'phone.max' => 'Máximo 15 carácteres',
+            'phone.min' => 'Mínimo 10 carácteres',
+        ];
+        return Validator::make($data, $rules, $messages);
     }
 
     /**
@@ -66,6 +84,9 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
