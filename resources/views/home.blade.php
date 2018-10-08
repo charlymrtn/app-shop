@@ -9,7 +9,8 @@
     </div>
     <div class="main main-raised">
         <div class="container">
-            @include('cart.cart-detail')
+            @if($metodo == 'home') @include('cart.cart-detail') @endif
+            @if($metodo == 'order') @include('cart.order-detail') @endif
         </div>
     </div>
     @yield('modal')

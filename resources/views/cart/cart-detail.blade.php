@@ -29,29 +29,28 @@
     <h2 class="title text-center">Hola {{Auth::user()->name}}</h2>
     @include('extras.notifications')
     @include('extras.errors')
-    <ul class="nav nav-pills nav-pills-icons" role="tablist">
+    <ul class="nav nav-pills nav-pills-icons" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
+            <a class="nav-link active" id="pills-cart-tab" href="#cart-detail" role="tab" data-toggle="tab" aria-controls="pills-cart" aria-selected="true">
                 <i class="material-icons">shopping_cart</i>
                 Carrito de compras
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
+            <a class="nav-link" d="pills-orders-tab" href="#orders" role="tab" data-toggle="tab" aria-controls="pills-orders" aria-selected="false">
                 <i class="material-icons">list</i>
                 Pedidos realizados
             </a>
         </li>
     </ul>
     <hr>
-    <h4>Tu carrito de compras presenta {{$cart->details->count()}} productos</h4>
-
-    @include('cart.tables.details')
-
-    <div class="text-center">
-            <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#addDate">
-            <i class="material-icons">done</i> Revisar Pedido
-        </button>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="cart-detail" role="tabpanel" aria-labelledby="pills-cart-tab">
+            @include('cart.tables.details')
+        </div>
+        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+            @include('cart.orders')
+        </div>
     </div>
 
 </div>

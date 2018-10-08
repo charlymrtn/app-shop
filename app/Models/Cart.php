@@ -59,4 +59,19 @@ class Cart extends Model
 
         return $pieces;
     }
+
+    public function getStatusNameAttribute()
+    {
+        $status = Status::find($this->status);
+
+        if($status->id ==1) return 'Activo';
+        if($status->id ==2) return 'Pendiente';
+        if($status->id ==3) return 'Aprobado';
+        if($status->id ==4) return 'Cancelado';
+        if($status->id ==5) return 'Entregado';
+
+        if($status) return $status;
+
+        return 'Desconocido';
+    }
 }

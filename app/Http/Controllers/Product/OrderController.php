@@ -11,8 +11,17 @@ class OrderController extends Controller
 {
     //
 
+    public function index()
+    {
+        $pedidos = Cart::all();
+
+        return $pedidos;
+    }
+
     public function show(Cart $order)
     {
-        return $order;
+        $metodo = 'order';
+        $cart = $order;
+        return view('home',compact('cart','metodo'));
     }
 }

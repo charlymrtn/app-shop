@@ -35,7 +35,7 @@
         </p>
         <hr>
         <p>
-            <a href="{{route('order.show',$cart->id)}}">Haz clic aquí</a>
+            <a href="{{route('orders.show',$cart->id)}}">Haz clic aquí</a>
             Para ver mas información sobre este pedido.
         </p>
     </body>

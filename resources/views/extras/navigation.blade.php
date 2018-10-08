@@ -33,6 +33,7 @@
                             @if (Auth::user()->admin)
                                 <a class="dropdown-item" href="{{route('categories.index')}}">Gestionar Categorías</a>
                                 <a class="dropdown-item" href="{{route('products.index')}}">Gestionar Productos</a>
+                                <a class="dropdown-item" href="{{route('orders.index')}}">Gestionar Pedidos</a>
                             @endif
 
                             <a class="dropdown-item" href="{{ route('logout') }}"

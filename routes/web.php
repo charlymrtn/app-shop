@@ -24,7 +24,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
     Route::get('products/{product}/images/{image}/featured','ImageController@featured')->name('images.featured');
 
     Route::resource('categories','CategoryController')->except('show');
-    Route::resource('order','OrderController');
+    Route::resource('orders','OrderController');
 
 });
 
