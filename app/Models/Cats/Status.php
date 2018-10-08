@@ -18,4 +18,18 @@ class Status extends Model
 
     protected $hidden = ['created_at','updated_at','deleted_at'];
 
+    public function getNameAttribute()
+    {
+
+        if($this->id ==1) return 'Activo';
+        if($this->id ==2) return 'Pendiente';
+        if($this->id ==3) return 'Aprobado';
+        if($this->id ==4) return 'Cancelado';
+        if($this->id ==5) return 'Entregado';
+
+        if($status) return $status;
+
+        return 'Desconocido';
+    }
+
 }

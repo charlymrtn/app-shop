@@ -15,6 +15,8 @@ use App\Mail\NewOrder;
 use App\Mail\ConfirmOrder;
 use App\User;
 
+use Uuid;
+
 class CartDetailController extends Controller
 {
 
@@ -127,6 +129,7 @@ class CartDetailController extends Controller
 
                 $cart->status = 2;
                 $cart->order_date = $order_date;
+                $cart->uuid = Uuid::generate();
                 $cart->save();
 
                 $admins = User::where('admin',true)->get();

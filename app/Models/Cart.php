@@ -13,8 +13,8 @@ class Cart extends Model
     //
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
-    protected $hidden = ['updated_at','deleted_at'];
+    protected $dates = ['deleted_at','order_date','arrived_date'];
+    protected $hidden = ['deleted_at'];
 
     public function status()
     {
@@ -35,7 +35,14 @@ class Cart extends Model
     {
         $date = $this->order_date;
 
-        return $date->format('d/m/Y');;
+        return $date->format('d/m/Y');
+    }
+
+    public function getDateUpdatedAttribute()
+    {
+        $date = $this->updated_at;
+
+        return $date->format('d/m/Y');
     }
 
     public function getTotalAttribute()
@@ -71,6 +78,17 @@ class Cart extends Model
         if($status->id ==5) return 'Entregado';
 
         if($status) return $status;
+
+        return 'Desconocido';
+    }
+
+    public function getClientNameAttribute()
+    {
+        $client = User::find($this->user_id);
+
+        $client = $client->name;
+
+        if($client) return $client;
 
         return 'Desconocido';
     }

@@ -7,7 +7,7 @@
 @endsection
 
 <div class="section">
-    <h2 class="title text-center">Pedido del día {{$cart->order_date}}</h2>
+    <h2 class="title text-center">Pedido del día {{$cart->date_order}}</h2>
     @include('extras.notifications')
     @include('extras.errors')
     <hr>

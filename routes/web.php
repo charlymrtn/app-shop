@@ -31,6 +31,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->namespace('Product')->grou
 Route::middleware(['auth'])->namespace('Product')->group(function() {
 
     Route::resource('cart', 'CartDetailController')->only('store','update','destroy');
+    Route::get('order/{order}','OrderController@order')->name('orders.order');
 
 });
 
